@@ -14,6 +14,14 @@ export const usernameValidation = [
  }
 ];
 
+export const phoneValidation = [
+  {
+    required: true,
+    message: 'Enter Phone Number',
+    pattern: /^(\+\d{1,3}[- ]?)?\d{10}$/g
+  }
+]
+
 export const passwordStrengthValidation = [
  {
   required: true,

@@ -1,36 +1,43 @@
 export interface userLogin {
- email: string;
+ userName: string;
  password: string;
 }
 
 export interface userLoginResponse {
- message: string;
+ response: response;
 }
 
-export interface userInfoResponse {
- data: userResponse;
+interface response{
  message: string;
+ payload: any;
+}
+export interface opsGetDoctorsResponse {
+  response: response;
 }
 
-export interface userResponse {
- _id: string;
- userName: string;
- email: string;
- employeeId: string;
- profileImage: string;
+export interface grantAccessResponse {
+ response: response;
 }
+
+export interface grantAccessRequest {
+ id: string;
+}
+
+
 export type UserSignupResponse = {
- data?: any;
  message: string;
+ response: response;
 };
 
 export type UserSignupRequest = {
  name: string;
  email: string;
  userName: string;
- employeeId: string;
- profileImage: string;
+ role: string;
+ gender: string;
  password: string;
+ phone: string;
+ age: number;
 };
 
 export type UserVerifyRequest = {

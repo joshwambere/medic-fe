@@ -14,5 +14,17 @@ export const routes = {
  dashboard: {
   name: 'Profile',
   url: '/dashboard'
+ },
+ patient: {
+  name: 'Profile',
+  url: '/dashboard/treatments'
+ },
+ doctor: {
+  name: 'Profile',
+  url: '/dashboard/doctors'
+ },
+ prescriptions: {
+  name: 'Profile',
+  url: '/dashboard/prescriptions'
  }
 };

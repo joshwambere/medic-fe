@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url("home.css");
+@import url("card.css");
 
 /* 
   colors 

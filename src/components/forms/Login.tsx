@@ -6,8 +6,8 @@ import { RiFacebookLine } from "react-icons/ri";
 import { BsInstagram } from "react-icons/bs";
 import { ErrorMessage } from "../shared/messages/ErrorMessage";
 import { SuccessMessage } from "../shared/messages/SuccessMessage";
-import { passwordValidation, usernameValidation } from "@/shared/utils/validations/formValidation";
-import { useLoginMutation, useUserInfoMutation } from "@/services/endpoints/auth.endpoint";
+import { passwordValidation, requiredInput } from "@/shared/utils/validations/formValidation";
+import { useLoginMutation, } from "@/services/endpoints/auth.endpoint";
 import { setCredentials, setUserInfo } from "@/shared/redux/slices/auth.slice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
@@ -16,30 +16,22 @@ import { routes } from "@/config/router.config";
 const Login = (): JSX.Element => {
 
   const [login, { isLoading: loginLoading }] = useLoginMutation();
-  const [userInfo] = useUserInfoMutation();
   const dispatch = useDispatch();
   const router = useRouter();
 
   const onFinish = (values: any) => {
-    login({ email: values?.username, password: values?.password })
+    login({ userName: values?.username, password: values?.password })
       .unwrap()
       .then((res: any) => {
-        dispatch(setCredentials({ token: res?.token }));
-        SuccessMessage(res.message);
-        userInfo()
-          .unwrap()
-          .then((res: any) => {
-            dispatch(setUserInfo({ user: res.data }));
-          })
-          .catch(e => {
-            ErrorMessage(e.message ? e.message : "Error getting user info");
-          });
+        dispatch(setCredentials({ token: res?.response.payload }));
+        SuccessMessage(res.response.message);
+        router.replace(routes.dashboard.url);
       })
       .catch((e: any) => {
         if (e.status === "FETCH_ERROR") {
           ErrorMessage("Network Error");
         } else {
-          ErrorMessage(e.message ? e.message : "Error loging in");
+          ErrorMessage(e.data ? e.data.message : "Error loging in");
         }
       });
   };
@@ -79,7 +71,7 @@ const Login = (): JSX.Element => {
                 <TiUserOutline color="#8c98a0" size="20" />
                 <Form.Item
                   name="username"
-                  rules={usernameValidation}
+                  rules={requiredInput}
                   style={{ margin: 0 }}
                 >
                   <input

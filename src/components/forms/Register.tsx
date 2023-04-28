@@ -2,7 +2,7 @@ import AuthWrapper from "../wrappers/AuthWrapper";
 import { TiUserOutline } from "react-icons/ti";
 import { FiLock, FiUserCheck } from "react-icons/fi";
 import { RiFacebookLine } from "react-icons/ri";
-import { BsInstagram } from "react-icons/bs";
+import { BsInstagram, BsFillTelephoneInboundFill, BsGenderAmbiguous } from "react-icons/bs";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { HiOutlineIdentification } from "react-icons/hi";
 import { useSignupMutation } from "@/services/endpoints/auth.endpoint";
@@ -10,7 +10,8 @@ import { Button, Form } from "antd";
 import {
   passwordStrengthValidation,
   requiredInput,
-  usernameValidation
+  usernameValidation,
+  phoneValidation
 } from "@/shared/utils/validations/formValidation";
 import { SuccessMessage } from "../shared/messages/SuccessMessage";
 import { ErrorMessage } from "../shared/messages/ErrorMessage";
@@ -25,21 +26,25 @@ const Register = (): JSX.Element => {
 
 
   const onFinish = async (data: any) => {
+    console.log(data);
     signup({
       name: data?.name,
       userName: data?.username,
       email: data?.email,
-      employeeId: data?.emp,
+      role: data?.role,
       password: data?.password,
-      profileImage: profileImage ? profileImage : ""
+      phone: data?.phone,
+      gender: data?.gender,
+      age: parseInt(data?.age),
     })
       .unwrap()
       .then((res: any) => {
-        SuccessMessage(res.message);
-
+        SuccessMessage(res.response.message);
+        router.replace(routes.login.url);
       })
       .catch((err: any) => {
-        ErrorMessage(err.message ? err.message : "Error signing up");
+        console.log(err);
+        ErrorMessage(err.data ? err.data.message : "Error signing up");
       });
   };
   return (
@@ -73,7 +78,7 @@ const Register = (): JSX.Element => {
                 <label htmlFor="email" className="text-[#8c98a0]">
                   Name
                 </label>
-                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-3 focus:bg-white input-group mt-2">
+                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-1 focus:bg-white input-group mt-2">
                   <TiUserOutline color="#8c98a0" size="20" />
                   <Form.Item
                     name="name"
@@ -93,7 +98,7 @@ const Register = (): JSX.Element => {
                 <label htmlFor="username" className="text-[#8c98a0]">
                   Username
                 </label>
-                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-3 focus:bg-white input-group mt-2">
+                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-1 focus:bg-white input-group mt-2">
                   <FiUserCheck color="#8c98a0" size="20" />
                   <Form.Item
                     name="username"
@@ -116,7 +121,7 @@ const Register = (): JSX.Element => {
                 <label htmlFor="email" className="text-[#8c98a0]">
                   Email
                 </label>
-                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-3 focus:bg-white input-group mt-2">
+                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-1 focus:bg-white input-group mt-2">
                   <MdOutlineAlternateEmail color="#8c98a0" size="20" />
                   <Form.Item
                     name="email"
@@ -132,19 +137,22 @@ const Register = (): JSX.Element => {
                   </Form.Item>
                 </div>
               </div>
-              <div className="group-input flex flex-col py-2 w-1/2 ">
+              <div className="group-input flex flex-col py-2 w-1/2">
                 <label htmlFor="email" className="text-[#8c98a0]">
-                  Profile Picture
+                  Phone
                 </label>
-                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-3 focus:bg-white input-group mt-2">
-                  <Form.Item name="profile">
+                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-1 focus:bg-white input-group mt-2">
+                  <BsFillTelephoneInboundFill color="#8c98a0" size="20" />
+                  <Form.Item
+                    name="phone"
+                    rules={phoneValidation}
+                    style={{ margin: 0 }}
+                  >
                     <input
-                      className=" profile-chooser w-full text-sm text-gray-900  rounded-lg  cursor-pointer dark:text-gray-400 focus:outline-none placeholder-[#8c98a0]  dark:border-gray-600"
-                      id="file_input"
-                      type="file"
-                      placeholder="Upload Profile Picture"
-                      name="profile"
-                      accept="image/png, image/gif, image/jpeg"
+                      className="bg-transparent w-full outline-none pl-2 login-input"
+                      type="text"
+                      id="phone"
+                      name="phone"
                     />
                   </Form.Item>
                 </div>
@@ -154,21 +162,23 @@ const Register = (): JSX.Element => {
             <div className="flex double-group pt-2 w-full gap-4">
               <div className="group-input flex flex-col py-2 w-1/2">
                 <label htmlFor="emp" className="text-[#8c98a0]">
-                  Employee Id
+                  Gender
                 </label>
-                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-3 focus:bg-white input-group mt-2">
-                  <HiOutlineIdentification color="#8c98a0" size="20" />
+                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-1 focus:bg-white input-group mt-2">
+                  <BsGenderAmbiguous color="#8c98a0" size="20" />
                   <Form.Item
-                    name="emp"
+                    name="gender"
                     rules={requiredInput}
                     style={{ margin: 0 }}
                   >
-                    <input
+                    <select
                       className="bg-transparent w-full outline-none pl-2 login-input"
-                      type="text"
-                      id="emp"
-                      name="emp"
-                    />
+                      id="gender"
+                      name="gender"
+                    >
+                      <option>MALE</option>
+                      <option>FEMALE</option>
+                    </select>
                   </Form.Item>
                 </div>
               </div>
@@ -176,11 +186,11 @@ const Register = (): JSX.Element => {
                 <label htmlFor="email" className="text-[#8c98a0]">
                   Password
                 </label>
-                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-3 focus:bg-white input-group mt-2">
+                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-1 focus:bg-white input-group mt-2">
                   <FiLock color="#8c98a0" />
                   <Form.Item
                     name="password"
-                    rules={passwordStrengthValidation}
+                    rules={requiredInput}
                     style={{ margin: 0 }}
                   >
                     <input
@@ -189,6 +199,55 @@ const Register = (): JSX.Element => {
                       id="password"
                       name="password"
                     />
+                  </Form.Item>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex double-group pt-2 w-full gap-4">
+              <div className=" flex flex-col py-2 w-1/2">
+                <label htmlFor="emp" className="text-[#8c98a0]">
+                  Role
+                </label>
+                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-1 focus:bg-white input-group mt-2">
+                  <HiOutlineIdentification color="#8c98a0" size="20" />
+                  <Form.Item
+                    name="role"
+                    rules={requiredInput}
+                    style={{ margin: 0 }}
+                  >
+                    <select
+                      className="bg-transparent w-full outline-none pl-2 login-input"
+
+                      id="role"
+                      name="role"
+                    >
+                      <option>PATIENT</option>
+                      <option>PHYISICIAN</option>
+                      <option>PHARMACIST</option>
+                    </select>
+                  </Form.Item>
+                </div>
+              </div>
+
+              <div className=" flex flex-col py-2 w-1/2">
+                <label htmlFor="emp" className="text-[#8c98a0]">
+                  Role
+                </label>
+                <div className="flex items-center bg-[#f1f6fa] rounded-3xl px-4 py-1 focus:bg-white input-group mt-2">
+                  <HiOutlineIdentification color="#8c98a0" size="20" />
+                  <Form.Item
+                    name="age"
+                    rules={requiredInput}
+                    style={{ margin: 0 }}
+                  >
+                    <input
+                      className="bg-transparent w-full outline-none pl-2 login-input"
+                      type="number"
+                      id="age"
+                      name="age"
+                    />
+                      
                   </Form.Item>
                 </div>
               </div>
