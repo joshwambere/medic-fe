@@ -8,7 +8,7 @@ import { ErrorMessage } from "../shared/messages/ErrorMessage";
 import { SuccessMessage } from "../shared/messages/SuccessMessage";
 import { passwordValidation, requiredInput } from "@/shared/utils/validations/formValidation";
 import { useLoginMutation, } from "@/services/endpoints/auth.endpoint";
-import { setCredentials, setUserInfo } from "@/shared/redux/slices/auth.slice";
+import { setCredentials } from "@/shared/redux/slices/auth.slice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { routes } from "@/config/router.config";

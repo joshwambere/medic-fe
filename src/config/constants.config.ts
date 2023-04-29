@@ -4,7 +4,7 @@ export const { NEXT_PUBLIC_API_SECRETE } = process.env;
 export const { NEXT_PUBLIC_CLOUDINARY_URL } = process.env;
 export const { NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET } = process.env;
 
-export const {JWT_SECRET} = process.env
+export const JWT_SECRET = process.env.NEXT_PUBLIC_JWT_SECRET;
 export const STEPS = [
  {
   element: '.chat-section',

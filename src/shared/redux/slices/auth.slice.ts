@@ -21,11 +21,6 @@ const slice = createSlice({
    localStorage.setItem('_galileo_tkn', token);
   },
 
-  setUserInfo: (state, { payload: { user } }) => {
-   state.user = user;
-   localStorage.setItem('_galileo_usr', JSON.stringify(user));
-  },
-
   removeCredentials: state => {
    state.token = undefined;
    localStorage.removeItem('_galileo_tkn');
@@ -33,5 +28,5 @@ const slice = createSlice({
  }
 });
 
-export const { setCredentials, removeCredentials, setUserInfo } = slice.actions;
+export const { setCredentials, removeCredentials,  } = slice.actions;
 export default slice.reducer;

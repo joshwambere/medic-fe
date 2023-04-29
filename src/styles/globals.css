@@ -3,6 +3,7 @@
 @tailwind utilities;
 @import url("home.css");
 @import url("card.css");
+@import url("symptoms.css");
 
 /* 
   colors 

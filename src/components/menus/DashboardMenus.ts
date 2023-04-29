@@ -8,6 +8,7 @@ export const TopMenus = [
     icon: AiOutlineClockCircle,
     name: 'Treatment',
     url: routes.dashboard.url,
+    role: 'PATIENT'
   },
   {
     defaultSelectedKey: '1',
@@ -15,6 +16,7 @@ export const TopMenus = [
     icon: AiOutlineClockCircle,
     name: 'Doctors',
     url: routes.doctor.url,
+    role: 'PATIENT'
   },
   {
     defaultSelectedKey: '3',
@@ -22,5 +24,14 @@ export const TopMenus = [
     icon: AiOutlineClockCircle,
     name: 'Pharmacists',
     url: routes.prescriptions.url,
+    role: 'PATIENT'
+  },
+  {
+    defaultSelectedKey: '3',
+    defaultOpenKey: 'sub2',
+    icon: AiOutlineClockCircle,
+    name: 'Patients',
+    url: routes.patient.url,
+    role: 'PHARMACIST PHYSICIAN'
   }
 ]

@@ -5,10 +5,10 @@ export type Doctor = {
  email: string;
  gender: string;
  age: number;
- phone: number;
+ phone: string;
  role: string;
  permissions: any[];
- access?: (id: string) => void;
+ access?: (id:string) => void;
 }
 
 

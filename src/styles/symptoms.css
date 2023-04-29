@@ -1,0 +1,95 @@
+.input-container {
+ 
+ display: flex;
+ height: 2.8rem;
+ width: 100%;
+ min-width: 200px;
+ width: 250px;
+ background-color: #fff;
+ border-radius: 8px;
+ box-shadow: 20px 20px 30px rgba(0, 0, 0, .05);
+ position: absolute;
+ margin-left: auto;
+ margin-right: auto;
+ left: 0;
+ right: 0;
+ margin-top: auto;
+ margin-bottom: auto;
+ top: 0;
+ bottom: 0;
+ text-align: center;
+}
+
+.input-container textarea {
+ height: 100%;
+ width: 100%;
+ border-radius: 8px;
+ border: 1px solid rgb(176 190 197);
+ margin-top: auto;
+ margin-bottom: auto;
+ padding: 0.625rem 70px 0.625rem 0.75rem;
+ font-size: 0.875rem;
+ line-height: 1.25rem;
+ font-weight: 400;
+ color: rgb(69 90 100);
+ outline: none;
+ transition: all .15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-container textarea:focus {
+ border: 1px solid #740ac0;
+}
+
+.invite-btn {
+ position: absolute;
+ width: 65px;
+ right: 7px;
+ top: 11px;
+ bottom: 8px;
+ z-index: 10;
+ border-radius: 4px;
+ background-color: #a0a8aa!important;
+ color: #fff;
+ padding-top: .25rem;
+ padding-bottom: .25rem;
+ padding-left: 0.5rem;
+ padding-right: 0.5rem;
+ text-align: center;
+ vertical-align: middle;
+ font-size: 12px;
+ font-weight: 600;
+ text-transform: uppercase;
+ border: none;
+ transition: .6s ease;
+ margin-top: auto;
+ margin-bottom: auto;
+}
+
+.invite-btn:hover {
+ right: 5px;
+ top: 9px;
+ bottom: 8px;
+ border-radius: 8px;
+ background-color: #740ac0!important;
+}
+
+.ant-btn :hover{
+ color: #fff!important;
+}
+
+.input-container input:placeholder-shown~.invite-btn {
+ pointer-events: none;
+ background-color: gray;
+ opacity: 0.5;
+}
+
+.sendConsultationForm{
+ padding: 0px 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}

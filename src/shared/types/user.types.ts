@@ -21,6 +21,13 @@ export interface grantAccessResponse {
 
 export interface grantAccessRequest {
  id: string;
+ symptoms: string;
+}
+
+export interface physicianConsult{
+ patientId: string;
+ physicianId: string;
+ diagnosis: string;
 }
 
 
