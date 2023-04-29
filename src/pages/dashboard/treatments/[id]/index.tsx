@@ -73,7 +73,7 @@ const Consultation = (): JSX.Element => {
     <div style={{ padding: '1rem', width: '100%' }}>
      <Row>
       {
-       consultationId?.map((consultation: any) => (<Prescriptions consultationId={consultation.id} symptoms={consultation.symptoms} patientId={consultation.patientId} physicianId={consultation.physicianId} access={showModal} />))
+       consultationId?.map((consultation: any) => (<Prescriptions key={consultation.id} consultationId={consultation.id} symptoms={consultation.symptoms} patientId={consultation.patientId} physicianId={consultation.physicianId} access={showModal} />))
       }
      </Row>
     </div>
