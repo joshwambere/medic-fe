@@ -5,6 +5,7 @@ import { useGetPatientsQuery } from "@/services/endpoints/opertaions.endpoint";
 import jwt from 'jsonwebtoken';
 import { useState } from "react";
 import Diagnose from "@/components/forms/Diagnose";
+import Prescribe from "@/components/forms/Prescribe";
 
 type Patient = {
   id: string;
@@ -23,6 +24,7 @@ const Treatments = (): JSX.Element => {
   const localToken = localStorage.getItem('_galileo_tkn');
   const decodedToken: any = jwt.decode(localToken!);
   const userId = decodedToken?.jti;
+  console.log(decodedToken.role)
   // Filter the patients based on permission array matching the id from the token
   const filteredPatients = patients?.response.payload?.filter((patient: Patient) =>
     patient.permissions.includes(userId)
@@ -62,7 +64,10 @@ const Treatments = (): JSX.Element => {
             className="sendConsultationForm"
             onClick={handleCancel}
           >
-            <Diagnose id={userId} patientId={doctorId} />
+            {
+              decodedToken.role === 'PHYSICIAN' ?<Diagnose id={userId} patientId={doctorId} />:
+            <Prescribe id={userId} patientId={doctorId} />
+            }
           </Form>
         }
         <div style={{ padding: '1rem', width: '100%' }}>
@@ -71,7 +76,7 @@ const Treatments = (): JSX.Element => {
               filteredPatients.map((patient: Patient) => (
                 <Patient 
                   key={patient.id}
-                  
+                  role={decodedToken.role}
                   name={patient.name}
                   id={patient.id}
                   access={showModal}

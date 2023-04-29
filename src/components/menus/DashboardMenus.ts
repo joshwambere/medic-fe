@@ -33,5 +33,21 @@ export const TopMenus = [
     name: 'Patients',
     url: routes.patient.url,
     role: 'PHARMACIST PHYSICIAN'
+  },
+  {
+    defaultSelectedKey: '4',
+    defaultOpenKey: 'sub2',
+    icon: AiOutlineClockCircle,
+    name: 'Medicine',
+    url: routes.medicine.url,
+    role: 'PHARMACIST'
+  },
+  {
+    defaultSelectedKey: '4',
+    defaultOpenKey: 'sub2',
+    icon: AiOutlineClockCircle,
+    name: 'download',
+    url: routes.download.url,
+    role: 'PATIENT'
   }
 ]

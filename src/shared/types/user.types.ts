@@ -14,6 +14,9 @@ interface response{
 export interface opsGetDoctorsResponse {
   response: response;
 }
+export interface consRequest{
+  id: any;
+}
 
 export interface grantAccessResponse {
  response: response;
@@ -28,6 +31,19 @@ export interface physicianConsult{
  patientId: string;
  physicianId: string;
  diagnosis: string;
+}
+
+export interface pharmacistPrescribe {
+  patientId: string;
+  pharmacistId: string;
+  consultationId: string;
+  medName: string;
+}
+
+export interface medicineRequest{
+  medName: string;
+  medPrice: number;
+  medExpData: string;
 }
 
 

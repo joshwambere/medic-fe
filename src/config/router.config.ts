@@ -19,6 +19,18 @@ export const routes = {
   name: 'Profile',
   url: '/dashboard/treatments'
  },
+ consultation: {
+  name: 'Profile',
+  url: '/dashboard/treatments/[id]'
+ },
+ medicine: {
+  name: 'Profile',
+  url: '/dashboard/medicine'
+ },
+ download: {
+  name: 'Profile',
+  url: '/dashboard/treatments/download'
+ },
  doctor: {
   name: 'Profile',
   url: '/dashboard/doctors'

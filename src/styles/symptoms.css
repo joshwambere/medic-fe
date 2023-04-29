@@ -35,6 +35,21 @@
  outline: none;
  transition: all .15s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.input-container select {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgb(176 190 197);
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0.625rem 70px 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  color: rgb(69 90 100);
+  outline: none;
+  transition: all .15s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 .input-container textarea:focus {
  border: 1px solid #740ac0;

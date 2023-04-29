@@ -1,6 +1,6 @@
 import { BaseApi } from '../api/api';
 import {
- opsGetDoctorsResponse, grantAccessRequest, grantAccessResponse, physicianConsult
+ opsGetDoctorsResponse, grantAccessRequest, grantAccessResponse, physicianConsult, medicineRequest, pharmacistPrescribe, consRequest
 } from '../../shared/types/user.types';
 import { headers } from 'next/dist/client/components/headers';
 
@@ -32,18 +32,27 @@ const operationsEndpoint = BaseApi.injectEndpoints({
     headers: { Authorization: `${localStorage.getItem('_galileo_tkn')}` }
    })
   }),
-
-  getConsultation: builder.mutation<grantAccessResponse, string>({
+  getConsultation: builder.mutation<grantAccessResponse, consRequest>({
    query: credentials => ({
-    url: `ops/patient/consultation/${credentials}`,
+    url: `ops/patient/consultation`,
+    method: 'POST',
+    body: credentials,
+    headers: { Authorization: `${localStorage.getItem('_galileo_tkn')}` }
+   })
+  }),
+
+  getPatients: builder.query<opsGetDoctorsResponse, void>({
+   query: credentials => ({
+    url: `ops/patient`,
     method: 'GET',
     body: credentials,
     headers: { Authorization: `${localStorage.getItem('_galileo_tkn')}` }
    })
   }),
-  getPatients: builder.query<opsGetDoctorsResponse, void>({
+
+  getMedicine: builder.query<opsGetDoctorsResponse, void>({
    query: credentials => ({
-    url: `ops/patient`,
+    url: `ops/medicine`,
     method: 'GET',
     body: credentials,
     headers: { Authorization: `${localStorage.getItem('_galileo_tkn')}` }
@@ -67,7 +76,22 @@ const operationsEndpoint = BaseApi.injectEndpoints({
     headers: { Authorization: `${localStorage.getItem('_galileo_tkn')}` }
    })
   }),
-
+  prescribe: builder.mutation<grantAccessResponse, pharmacistPrescribe>({
+   query: credentials => ({
+    url: `ops/pharamcist/prescribe`,
+    method: 'POST',
+    body: credentials,
+    headers: { Authorization: `${localStorage.getItem('_galileo_tkn')}` }
+   })
+  }),
+  createMedecine: builder.mutation<grantAccessResponse, medicineRequest>({
+   query: credentials => ({
+    url: `ops/medicine`,
+    method: 'POST',
+    body: credentials,
+    headers: { Authorization: `${localStorage.getItem('_galileo_tkn')}` }
+   })
+  }),
 
  })
 
@@ -80,6 +104,9 @@ export const {
  useGetConsultationsQuery,
  useGetConsultationMutation,
  useGetPatientsQuery,
+ useGetMedicineQuery,
  useConsultationMutation,
+ usePrescribeMutation,
+ useCreateMedecineMutation,
  useGrantAccessMutation
 } = operationsEndpoint;
