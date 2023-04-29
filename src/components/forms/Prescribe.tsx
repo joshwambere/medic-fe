@@ -62,7 +62,7 @@ const Prescribe = ({ pharmacistId, patientId, consultationId }: Permission): JSX
    >
     {
      medcines?.response.payload&& medcines?.response.payload?.map((medicine: any) => (
-       <Option value={medicine.medName}>{medicine.medName}</Option>
+       <Option key={medicine.medName} value={medicine.medName}>{medicine.medName}</Option>
      )) 
     }
    </Select>
