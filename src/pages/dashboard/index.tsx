@@ -14,7 +14,7 @@ const Dashboard = (): JSX.Element => {
           <Row>
             {consultations &&
               consultations?.response.payload?.map((consultation: Treatment) => (
-                <Treatments id={consultation.id} date={consultation.date} symptoms={consultation.symptoms}/>
+                <Treatments key={consultation.id} id={consultation.id} date={consultation.date} symptoms={consultation.symptoms}/>
               ))}
           </Row>
         </div>
